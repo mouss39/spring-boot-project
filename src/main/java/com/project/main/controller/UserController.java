@@ -9,26 +9,27 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.project.main.model.AuthUser;
 import com.project.main.model.User;
 import com.project.main.services.UserService;
 
 @RestController
-@RequestMapping("/auth")
-public class AuthController {
+@RequestMapping("/user")
+public class UserController {
 
 	@Autowired
 	UserService userService;
 
-	@PostMapping(value = "/login", consumes = MediaType.APPLICATION_JSON_VALUE)
-	ResponseEntity<?> Login(@RequestBody AuthUser authUser) {
+	@PostMapping(value = "/addUser", consumes = MediaType.APPLICATION_JSON_VALUE)
+	ResponseEntity<?> addUser(@RequestBody User user) {
 
-		User user = userService.authUser(authUser);
+//		User userTemp = userService.checkUser(user.getEmail());
+//		// to make sure the same user does not exist
+//		if (userTemp.getEmail() != null) {
+//			return new ResponseEntity<>(HttpStatus.CONFLICT);
+//		}
+//		userService.addUser(user);
 
-		if (user != null)
-			return new ResponseEntity<>(user, HttpStatus.OK);
-		return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
 }

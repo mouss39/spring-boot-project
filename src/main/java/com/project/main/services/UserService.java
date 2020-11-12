@@ -13,9 +13,19 @@ public class UserService {
 	@Autowired
 	UserQuery userQuery;
 
-	public User checkUser(AuthUser user) {
-		User res = userQuery.checkUser(user);
+	public User authUser(AuthUser user) {
+		User res = userQuery.authUser(user);
 		return res;
+	}
+
+	public User checkUser(String email) {
+		User res = userQuery.checkUser(email);
+		return res;
+	}
+
+	public void addUser(User user) {
+		userQuery.addUser(user);
+
 	}
 
 }
