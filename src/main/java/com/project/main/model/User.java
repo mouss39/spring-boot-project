@@ -12,13 +12,10 @@ public class User {
 
 	private String password;
 
-	// readonly
-	private Integer age;
-
-	private String sex;
-
 	private String telNumber;
 	private long dateOfBirth; // to date
+	private String sex;
+	private Integer age;
 
 	public Integer getId() {
 		return id;

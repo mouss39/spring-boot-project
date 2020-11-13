@@ -13,16 +13,11 @@ public interface UserQuery {
 	@Select("Select * from users where email=#{email} and password=#{password}")
 	User authUser(AuthUser user);
 
-	@Select("Select * from users where email=#{email} ")
+	@Select("Select * from users where email=#{email}")
 	User checkUser(String email);
-	// INSERT INTO `mydb`.`users`
-	// (`first_name`, `last_name`, `email`, `password`, `tel_number`,
-	// `date_of_birth`, `sex`)
-	// VALUES ('exampleName', 'exampleLast', 'example@example.com', 'example',
-	// '123455', '2020-11-11 10:35:28', 'f');
 
-	@Insert("INSERT INTO users" + "( first_name, last_name, email, password,tel_number,date_of_birth, sex,age) "
-			+ "VALUES ( #{firstName}, #{lastName} , #{email},#{password}, #{telNumber}, #{dateOfBirth},#{sex},#{age} )")
+	@Insert("INSERT INTO users" + "( first_name, last_name, email, password,tel_number, sex,age) "
+			+ "VALUES ( #{firstName}, #{lastName} , #{email},#{password}, #{telNumber},#{sex},#{age} )")
 	void addUser(User user);
 
 //	@Insert("INSERT INTO users" + "( first_name, last_name) " + "VALUES ('mohamad','last' )")

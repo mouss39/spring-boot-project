@@ -22,6 +22,7 @@ public class AuthController {
 
 	@PostMapping(value = "/login", consumes = MediaType.APPLICATION_JSON_VALUE)
 	ResponseEntity<?> Login(@RequestBody AuthUser authUser) {
+		System.out.println("here I am");
 		User user = userService.authUser(authUser);
 
 		if (user != null)

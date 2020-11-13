@@ -27,12 +27,17 @@ public class UserController {
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Successfully updated user") })
 	@PostMapping(value = "/addUser", consumes = MediaType.APPLICATION_JSON_VALUE)
 	ResponseEntity<?> addUser(@RequestBody User user) {
-		System.out.println("here I am");
-		User userTemp = userService.checkUser(user.getEmail());
-		// to make sure the same user does not exist
-		if (userTemp.getEmail() != null) {
-			return new ResponseEntity<>(HttpStatus.CONFLICT);
-		}
+		System.out.println("here I am add" + user.getSex() + "--" + user.getFirstName() + "--" + user.getLastName()
+				+ "--" + user.getAge() + "--" + user.getTelNumber());
+
+		// TODO problem with the naming it is not reading them with_
+//		User userTemp = userService.checkUser(user.getEmail());
+//		System.out.println("userTemp" + userTemp.getSex() + "--" + userTemp.getFirstName() + "--"
+//				+ userTemp.getLastName() + "--" + userTemp.getAge() + "--" + userTemp.getTelNumber());
+//		// to make sure the same user does not exist
+//		if (userTemp.getEmail() != null) {
+//			return new ResponseEntity<>(HttpStatus.CONFLICT);
+//		}
 		userService.addUser(user);
 
 		return new ResponseEntity<>(HttpStatus.OK);
