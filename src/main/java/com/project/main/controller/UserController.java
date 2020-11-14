@@ -24,23 +24,25 @@ public class UserController {
 	UserService userService;
 
 	@ApiOperation(value = "add user", response = Integer.class)
-	@ApiResponses(value = { @ApiResponse(code = 200, message = "Successfully updated user") })
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "Successfully updated user"),
+			@ApiResponse(code = 409, message = "Conflict: User already exist") })
 	@PostMapping(value = "/addUser", consumes = MediaType.APPLICATION_JSON_VALUE)
 	ResponseEntity<?> addUser(@RequestBody User user) {
 		System.out.println("here I am add" + user.getSex() + "--" + user.getFirstName() + "--" + user.getLastName()
 				+ "--" + user.getAge() + "--" + user.getTelNumber());
 
-		// TODO problem with the naming it is not reading them with_
-//		User userTemp = userService.checkUser(user.getEmail());
-//		System.out.println("userTemp" + userTemp.getSex() + "--" + userTemp.getFirstName() + "--"
-//				+ userTemp.getLastName() + "--" + userTemp.getAge() + "--" + userTemp.getTelNumber());
-//		// to make sure the same user does not exist
-//		if (userTemp.getEmail() != null) {
-//			return new ResponseEntity<>(HttpStatus.CONFLICT);
-//		}
-		userService.addUser(user);
+		User userTemp = userService.checkUser(user.getEmail());
+		// to make sure the same user does not exist
+		if (userTemp != null) {
+			// there is already an account with the same email
+			return new ResponseEntity<>(HttpStatus.CONFLICT);
+		} else {
+			// no same email
+			userService.addUser(user);
 
-		return new ResponseEntity<>(HttpStatus.OK);
+			return new ResponseEntity<>(HttpStatus.OK);
+
+		}
 	}
 //
 //	@GetMapping(value = "/{email}", produces = MediaType.APPLICATION_JSON_VALUE)

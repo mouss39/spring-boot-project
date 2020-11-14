@@ -16,7 +16,7 @@ public interface UserQuery {
 	@Select("Select * from users where email=#{email}")
 	User checkUser(String email);
 
-	@Insert("INSERT INTO users" + "( first_name, last_name, email, password,tel_number, sex,age) "
+	@Insert("INSERT INTO users" + "( firstName, lastName, email, password,telNumber, sex,age) "
 			+ "VALUES ( #{firstName}, #{lastName} , #{email},#{password}, #{telNumber},#{sex},#{age} )")
 	void addUser(User user);
 
